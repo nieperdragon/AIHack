@@ -11,3 +11,17 @@ Generate a Playwright test for the following scenario:
 2. search for 'Garfield'
 3. verify the movie is in the list
 ```
+Generate a Playwright test for the following scenario:
+1. Navigate to https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+2. login to OrangeHRM using the login information foundon this page
+3. Navigate to the PIM page
+4. Start the add employee process
+5. Create an employee with Firstname Mickey middlename The Lastname Mouse
+6. The employee is male, single, british and has a dob of June 6th 1985
+7. Navigate to the PIM page
+8. Verify that the new user has been created
+
+
+
+
+
