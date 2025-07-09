@@ -1,0 +1,44 @@
+### **Test Case: Manually Add a New Employee**
+
+**Test Case ID:** `TC_PIM_ADD_EMPLOYEE_001`
+
+**Objective:** To verify that an administrator can successfully add a new employee to the system using the "Add Employee" feature in the PIM (Personal Information Management) module.
+
+> **Note:** Username and password values are now referenced from environment variables (`ORANGEHRM_USERNAME`, `ORANGEHRM_PASSWORD`). Set these in your environment or `.env` file before running the test.
+
+**Prerequisites:**
+1.  A modern web browser (e.g., Chrome, Firefox) is installed.
+2.  You have access to the internet.
+3.  You have the URL for the OrangeHRM demo site and valid administrator credentials.
+
+**Test Data:**
+*   **URL:** `${ORANGEHRM_URL}`
+*   **Username:** `${ORANGEHRM_USERNAME}`
+*   **Password:** `${ORANGEHRM_PASSWORD}`
+*   **New Employee First Name:** `John`
+*   **New Employee Last Name:** `Smith`
+*   **New Employee Username:** `jsmith01`
+*   **New Employee Password:** `Testing@123`
+
+---
+
+### **Test Steps**
+
+| Step # | Page / Section | Action | Expected Result |
+| :--- | :--- | :--- | :--- |
+| 1 | **Login Page** | Navigate to the OrangeHRM demo URL: `${ORANGEHRM_URL}` | The OrangeHRM login page loads successfully, displaying fields for Username and Password. |
+| 2 | **Login Page** | Enter `${ORANGEHRM_USERNAME}` in the **Username** field. Enter `${ORANGEHRM_PASSWORD}` in the **Password** field. Click the **Login** button. | You are successfully logged in and redirected to the main **Dashboard**. |
+| 3 | **Dashboard** | In the left-hand navigation menu, click on the **PIM** option. | The page navigates to the **Employee List** screen within the PIM module. A table of existing employees is displayed. |
+| 4 | **PIM > Employee List** | In the top bar of the main content area, click the **Add Employee** button. | The page navigates to the **Add Employee** form. The form displays fields for First Name, Middle Name, and Last Name. |
+| 5 | **PIM > Add Employee** | In the **First Name** field, enter `John`. In the **Last Name** field, enter `Smith`. | The names are correctly entered into the respective fields. The **Employee Id** field may be auto-populated. |
+| 6 | **PIM > Add Employee** | Locate the **Create Login Details** toggle switch and click it to enable it. | The toggle switch moves to the "on" position, and new fields for Username, Password, and Confirm Password appear. |
+| 7 | **PIM > Add Employee** | In the **Username** field, enter `jsmith01`. In the **Password** field, enter `Testing@123`. In the **Confirm Password** field, enter `Testing@123`. | The login credentials are correctly entered into the form. |
+| 8 | **PIM > Add Employee** | Click the **Save** button. | The system processes the information. A "Success" pop-up message appears briefly, and you are redirected to the new employee's **Personal Details** page. The name "John Smith" is displayed at the top of the profile. |
+| 9 | **PIM > Personal Details** | In the left-hand navigation menu, click on **Employee List**. | You are returned to the main **Employee List** page. |
+| 10 | **PIM > Employee List** | In the **Employee Information** search box, type `John Smith` into the **Employee Name** field and click the **Search** button. | The employee list is filtered, and a single record is found and displayed in the results table, showing the newly created employee "John Smith". |
+
+***
+
+**Post-conditions:**
+*   A new employee record for "John Smith" exists in the system.
+*   A new user account with the username "jsmith01" is created.
