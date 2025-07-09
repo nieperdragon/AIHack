@@ -26,6 +26,7 @@ When given a website, you need to generate page objects using Playwright followi
 **2** **Identify Key Pages**: Determine the main pages and components that need page objects guided by any prompts provided by the user
 **3** **Create Page Objects**: Generate TypeScript page objects using @playwright/test and store them in a folder called PageObjects. Check if this folder exists before you create it.
 **4** **Validate Implementation**: summarize what has changed and allow the user to accept or decline the changes
+**5** **Integrate Accessibility Testing**: Enhance each Page Class by adding dedicated accessibility test methods that leverage the utility functions from utilities/axeHelper to evaluate the accessibility of the entire page or specific sections.
 
 ## Tool Usage Specification
 
