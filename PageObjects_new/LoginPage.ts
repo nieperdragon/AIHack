@@ -1,5 +1,6 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { testAccessibility } from '../utilities/axeHelper';
 
 export class LoginPage extends BasePage {
     readonly usernameInput: Locator;
@@ -10,6 +11,7 @@ export class LoginPage extends BasePage {
         username: Locator;
         password: Locator;
     };
+    readonly errorMessage: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -21,6 +23,7 @@ export class LoginPage extends BasePage {
             username: page.getByText('Username : Admin'),
             password: page.getByText('Password : admin123')
         };
+        this.errorMessage = page.locator('.oxd-alert-content-text');
     }
 
     async login(username: string, password: string): Promise<void> {
@@ -41,5 +44,17 @@ export class LoginPage extends BasePage {
             username: usernameText.split(':')[1].trim(),
             password: passwordText.split(':')[1].trim()
         };
+    }
+
+    async assertLoginErrorVisible(): Promise<void> {
+        await expect(this.errorMessage).toBeVisible();
+    }
+
+    /**
+     * Runs an accessibility check on the login page using axeHelper.
+     * Returns the accessibility results.
+     */
+    async checkAccessibility() {
+        return await testAccessibility(this.page);
     }
 }

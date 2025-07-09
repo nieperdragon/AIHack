@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test';
+import { testAccessibility } from '../utilities/axeHelper';
 
 export class LoginPage {
     readonly page: Page;
@@ -56,4 +57,11 @@ export class LoginPage {
         await this.page.waitForURL('**/auth/login');
         await this.usernameInput.waitFor({ state: 'visible' });
     }
-} 
+
+    /**
+     * Runs an accessibility check on the login form using axeHelper.
+     */
+    async checkAccessibility(): Promise<void> {
+        await testAccessibility(this.page, '.oxd-form');
+    }
+}
