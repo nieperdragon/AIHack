@@ -1,27 +1,25 @@
-# Demo: Generating tests for Playwright Movies App
+# Project Instructions
 
-1. Make sure the server is running. You can press start in the server in the .vscode/settings.json file
+## 1. Generate Page Objects
 
-2. Add the prompts/generate:test.md file to the chat context
+1. Open the **Secondary Side Bar** in Visual Studio Code.
+2. Click **Add context** and search for `create-pom-rules.md` files.
+3. Enter a prompt to generate *all* the pages for your application.  
+   *Be sure to provide your Application URL.*
+4. Review the generated results.  
+   *If you want to make changes, update your prompt.*
+5. Follow the instructions to create the pages.
+6. Verify that the newly created pages meet your requirements.
 
-3. Paste the following code into Copilot using Agent mode and Claude 3.5
-```md
-Generate a Playwright test for the following scenario:
-1. Navigate to https://debs-obrien.github.io/playwright-movies-app
-2. search for 'Garfield'
-3. verify the movie is in the list
-```
-Generate a Playwright test for the following scenario:
-1. Navigate to https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-2. login to OrangeHRM using the login information foundon this page
-3. Navigate to the PIM page
-4. Start the add employee process
-5. Create an employee with Firstname Mickey middlename The Lastname Mouse
-6. The employee is male, single, british and has a dob of June 6th 1985
-7. Navigate to the PIM page
-8. Verify that the new user has been created
+---
 
+## 2. Create Test Cases
 
-
-
-
+1. Open the **Secondary Side Bar**.
+2. Click **Add context** and search for `generate-test-cases.md` files.
+3. Enter a prompt to generate test cases based on the pages you created.
+4. Review the generated results.  
+   *If you want to make changes, update your prompt.*
+5. Follow the instructions to create the tests.
+6. Verify that the newly created tests meet your requirements.  
+   **Note:** The test run should start automatically.
