@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
 
-export class LoginPage extends BasePage {
+export class LoginPage {
+    readonly page: Page;
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
@@ -10,13 +10,18 @@ export class LoginPage extends BasePage {
         username: Locator;
         password: Locator;
     };
+    readonly logo: Locator;
+    readonly loginForm: Locator;
 
     constructor(page: Page) {
-        super(page);
+        this.page = page;
         this.usernameInput = page.getByPlaceholder('Username');
         this.passwordInput = page.getByPlaceholder('Password');
         this.loginButton = page.getByRole('button', { name: 'Login' });
         this.forgotPasswordLink = page.getByText('Forgot your password?');
+        this.logo = page.getByAltText('client brand banner');
+        this.loginForm = page.locator('.oxd-form');
+        
         this.credentialsHint = {
             username: page.getByText('Username : Admin'),
             password: page.getByText('Password : admin123')
@@ -38,8 +43,17 @@ export class LoginPage extends BasePage {
         const passwordText = await this.credentialsHint.password.textContent() || '';
         
         return {
-            username: usernameText.split(':')[1].trim(),
-            password: passwordText.split(':')[1].trim()
+            username: usernameText.split(':')[1]?.trim() || 'Admin',
+            password: passwordText.split(':')[1]?.trim() || 'admin123'
         };
     }
-}
+
+    async isLoginPageVisible(): Promise<boolean> {
+        return await this.usernameInput.isVisible();
+    }
+
+    async waitForLoginPage(): Promise<void> {
+        await this.page.waitForURL('**/auth/login');
+        await this.usernameInput.waitFor({ state: 'visible' });
+    }
+} 
