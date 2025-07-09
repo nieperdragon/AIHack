@@ -1,5 +1,8 @@
 # Project Instructions
 
+## Pre-Requisites 
+Visit [OrangeHRM](https://opensource-demo.orangehrmlive.com/) and explore the site to familiarize yourself with the user journey and various pages. This will help you validate the generated pages and tests in this project.
+
 ## 1. Generate Page Objects
 
 1. Open the Secondary Side Bar (top right corner) in VS Code. You can also open it using `Ctrl + Alt + B`.
