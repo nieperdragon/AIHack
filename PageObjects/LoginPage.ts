@@ -1,26 +1,22 @@
 import { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { testAccessibility } from '../utilities/axeHelper';
 
-export class LoginPage extends BasePage {
+export class LoginPage {
+    readonly page: Page;
+    // Define all locators at the top
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
-    readonly forgotPasswordLink: Locator;
-    readonly credentialsHint: {
-        username: Locator;
-        password: Locator;
-    };
 
     constructor(page: Page) {
-        super(page);
-        this.usernameInput = page.getByPlaceholder('Username');
-        this.passwordInput = page.getByPlaceholder('Password');
-        this.loginButton = page.getByRole('button', { name: 'Login' });
-        this.forgotPasswordLink = page.getByText('Forgot your password?');
-        this.credentialsHint = {
-            username: page.getByText('Username : Admin'),
-            password: page.getByText('Password : admin123')
-        };
+        this.page = page;
+        this.usernameInput = page.locator('input[name="username"]');
+        this.passwordInput = page.locator('input[name="password"]');
+        this.loginButton = page.locator('input[value="Log In"]');
+    }
+
+    async navigateToLoginPage(): Promise<void> {
+        await this.page.goto('https://parabank.parasoft.com');
     }
 
     async login(username: string, password: string): Promise<void> {
@@ -29,17 +25,7 @@ export class LoginPage extends BasePage {
         await this.loginButton.click();
     }
 
-    async clickForgotPassword(): Promise<void> {
-        await this.forgotPasswordLink.click();
-    }
-
-    async getDefaultCredentials(): Promise<{ username: string; password: string }> {
-        const usernameText = await this.credentialsHint.username.textContent() || '';
-        const passwordText = await this.credentialsHint.password.textContent() || '';
-        
-        return {
-            username: usernameText.split(':')[1].trim(),
-            password: passwordText.split(':')[1].trim()
-        };
+    async checkAccessibility(): Promise<void> {
+        await testAccessibility(this.page);
     }
 }
